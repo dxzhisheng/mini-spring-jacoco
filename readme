@@ -1,0 +1,17 @@
+https://blog.csdn.net/weixin_45741835/article/details/124240468
+
+
+//使用命令启动SpringBoot，启动参数添加-javaagent：
+java -javaagent:jacoco/jacocoagent.jar=includes=*,output=tcpserver,port=6300 -jar target/mini-0.0.1-SNAPSHOT.jar
+
+--项目启动后可以访问springboot项目进行相应页面或者接口访问
+
+//生成report文件，此时会生成1个jacoco.exec文件，这个文件就是覆盖率数据文件，
+java -jar jacoco/jacococli.jar dump --address localhost --port 6300 --destfile jacoco.exec
+
+
+
+//生成xml或者html文件；采用以下命令根据数据文件生成HTML报告：
+java -jar jacoco/jacococli.jar report jacoco.exec --classfiles ./target/classes/ --sourcefiles ./src/main/java/ --html ./report
+
+--打开report文件夹中index.html
